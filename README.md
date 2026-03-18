@@ -1,4 +1,4 @@
-# ⚡ LogPulse — Multi-Tenant Application Monitoring Platform
+## LogPulse — Multi-Tenant Application Monitoring Platform
 
 A production-grade, full-stack application monitoring platform built with React, Node.js/Express, PostgreSQL (Prisma ORM), Redis, and Socket.IO.
 
@@ -8,31 +8,31 @@ A production-grade, full-stack application monitoring platform built with React,
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                      FRONTEND (React)                        │
+│                      FRONTEND (React)                       │
 │  Auth → Dashboard → Logs → Analytics → API Keys → Users     │
 │  React Query (cache) + Socket.IO (real-time)                │
 └────────────────────────┬────────────────────────────────────┘
                          │ HTTP / WebSocket
 ┌────────────────────────▼────────────────────────────────────┐
-│                   BACKEND (Express + TS)                     │
-│                                                              │
+│                   BACKEND (Express + TS)                    │
+│                                                             │
 │  POST /api/v1/logs/ingest  (API Key auth)                   │
 │  GET  /api/v1/logs         (JWT auth)                       │
 │  GET  /api/v1/analytics    (JWT auth)                       │
 │  POST /api/v1/auth/login   (public)                         │
-│  ...                                                         │
+│  ...                                                        │
 └───────────┬─────────────────────────┬───────────────────────┘
             │                         │
-    ┌───────▼──────┐         ┌────────▼────────┐
-    │    REDIS      │         │   PostgreSQL     │
-    │               │         │                  │
-    │  Log Queue    │         │  tenants         │
-    │  (RPUSH/LPOP) │         │  users           │
-    │               │         │  api_keys        │
-    │  API Key Cache│         │  logs            │
-    │  Rate Limits  │         │  audit_logs      │
-    │  Stats Cache  │         │                  │
-    └───────┬───────┘         └──────────────────┘
+    ┌───────▼───────┐        ┌────────▼────────┐
+    │    REDIS      │        │   PostgreSQL    │
+    │               │        │                 │
+    │  Log Queue    │        │  tenants        │
+    │  (RPUSH/LPOP) │        │  users          │
+    │               │        │  api_keys       │
+    │ API Key Cache │        │  logs           │
+    │  Rate Limits  │        │  audit_logs     │
+    │  Stats Cache  │        │                 │
+    └───────┬───────┘        └─────────────────┘
             │                         ▲
     ┌───────▼──────────────────────── ┤
     │         LOG WORKER              │
